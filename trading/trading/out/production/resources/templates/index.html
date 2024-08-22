@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Trading Bot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+</head>
+
+<body>
+
+<div class ="container">
+    <div class="row pt-5" id="login-form">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center" style="font-weight:bold;"> AUTHENTICATION </h5>
+                    <div class="form-signin">
+                        <div class="form-label-group mb-2">
+                            <input type="password" id="appKey" class="form-control" placeholder="App Key" onkeyup="clickEnter()" required>
+                            <div class="invalid-feedback col-10" id="validAppKey">Please Input Your App Key</div>
+                            <label for="appKey">App Key</label>
+                        </div>
+                        <div class="form-label-group mb-4">
+                            <input type="password" id="appSecret" class="form-control" placeholder="App Secret" onkeyup="clickEnter()" required>
+                            <div class="invalid-feedback col-10" id="validAppSecret">Please Input Your App Secret</div>
+                            <label for="appSecret">App Secret</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick ='signIn()'>Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="/js/index.js"></script>
+</body>
+</html>
