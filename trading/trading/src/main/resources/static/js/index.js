@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+    $('#loading').hide();
+});
+
 function signIn()
 {
 	$('#validAppKey').hide();
@@ -5,6 +9,7 @@ function signIn()
 
 	var appKey = $('#appKey').val();
 	var appSecret = $('#appSecret').val();
+	var analyticsServer = $('#analyticsServer').val();
 
 
     if(appKey == "")
@@ -19,10 +24,16 @@ function signIn()
         return;
     }
 
+    if(analyticsServer == "")
+    {
+        $('#validAnalyticsServer').show();
+    }
+
 
 	var data ={
 			appKey : appKey,
 			appSecret : appSecret,
+			analyticsServer : analyticsServer
 	};
 
 
@@ -35,8 +46,24 @@ function signIn()
 	        withCredentials: true
 	    },
     	success: function(response) {
-    		console.log(response);
-
+            alert("success");
+            $('#register').hide();
+            $('#loading').show();
+//            $.ajax({
+//                    url: 'election',
+//                    type: 'GET',
+//                    contentType: 'application/json',
+//            	    xhrFields: {
+//            	        withCredentials: true
+//            	    },
+//                	success: function(response) {
+//                        alert("success");
+//                        getView("stock_election");
+//                    },
+//                    failure: function( response ) {
+//                 	   alert('fail');
+//                    }
+//            	});
         },
         failure: function( response ) {
      	   alert('fail');

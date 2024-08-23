@@ -115,6 +115,19 @@ body {
   }
 }
 
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner-border.thicker {
+  border-width: 12px; /* 두께 조정 */
+  width: 30%;
+  height: 30%;
+}
+
 /* Fallback for IE
 -------------------------------------------------- */
 
