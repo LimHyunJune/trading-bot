@@ -1,6 +1,6 @@
 package com.example.trading;
 
-import com.example.trading.datafetcher.realtime.RealTimeDataParser;
+import com.example.trading.util.RealTimeDataParser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

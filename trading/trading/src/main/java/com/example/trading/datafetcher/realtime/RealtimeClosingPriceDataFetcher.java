@@ -1,9 +1,9 @@
 package com.example.trading.datafetcher.realtime;
 
 import com.example.trading.auth.AuthManager;
+import com.example.trading.util.RealTimeDataParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
