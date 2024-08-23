@@ -1,14 +1,14 @@
-package com.example.trading.auth;
+package com.example.trading.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthDTO {
+public class RegisterDTO {
     String appKey;
     String appSecret;
+    String analyticsServer;
 }
