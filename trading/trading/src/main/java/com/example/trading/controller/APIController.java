@@ -1,21 +1,15 @@
 package com.example.trading.controller;
 
-import com.example.trading.auth.AuthDTO;
-
 import com.example.trading.auth.AuthManager;
 import com.example.trading.datafetcher.realtime.RealtimeClosingPriceDataFetcher;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.trading.dto.RegisterDTO;
+import com.example.trading.kafka.KafkaManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestClient;
 
-import java.util.Map;
 
 @RestController
 public class APIController {
@@ -23,13 +17,17 @@ public class APIController {
     @Autowired
     AuthManager authManager;
     @Autowired
+    KafkaManager kafkaManager;
+    @Autowired
     RealtimeClosingPriceDataFetcher realtimeClosingPriceDataFetcher;
 
     @PostMapping("/register")
-    public void register(@RequestBody AuthDTO authDTO) {
-        authManager.setAppKey(authDTO.getAppKey());
-        authManager.setAppSecret(authDTO.getAppSecret());
+    public void register(@RequestBody RegisterDTO registerDTO) {
+        authManager.setAppKey(registerDTO.getAppKey());
+        authManager.setAppSecret(registerDTO.getAppSecret());
         authManager.getWebSocketConnectionKey();
+
+        kafkaManager.setBootstrap(registerDTO.getAnalyticsServer());
     }
 
     @GetMapping("/test")
