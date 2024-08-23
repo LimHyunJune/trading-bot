@@ -1,4 +1,4 @@
-package com.example.trading.datafetcher.realtime;
+package com.example.trading.util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
