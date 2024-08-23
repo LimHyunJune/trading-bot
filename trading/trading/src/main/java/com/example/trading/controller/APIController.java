@@ -3,6 +3,7 @@ package com.example.trading.controller;
 import com.example.trading.auth.AuthDTO;
 
 import com.example.trading.auth.AuthManager;
+import com.example.trading.datafetcher.realtime.RealtimeClosingPriceDataFetcher;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class APIController {
 
     @Autowired
     AuthManager authManager;
+    @Autowired
+    RealtimeClosingPriceDataFetcher realtimeClosingPriceDataFetcher;
 
     @PostMapping("/register")
     public void register(@RequestBody AuthDTO authDTO) {
@@ -32,6 +35,7 @@ public class APIController {
     @GetMapping("/test")
     public String test()
     {
+        realtimeClosingPriceDataFetcher.connect("005930");
         return authManager.getApprovalKey();
     }
 }
