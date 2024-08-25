@@ -26,8 +26,7 @@ public class APIController {
         authManager.setAppKey(registerDTO.getAppKey());
         authManager.setAppSecret(registerDTO.getAppSecret());
         authManager.getWebSocketConnectionKey();
-
-        kafkaManager.setBootstrap(registerDTO.getAnalyticsServer());
+        kafkaManager.init(registerDTO.getAnalyticsServer());
     }
 
     @GetMapping("/test")
