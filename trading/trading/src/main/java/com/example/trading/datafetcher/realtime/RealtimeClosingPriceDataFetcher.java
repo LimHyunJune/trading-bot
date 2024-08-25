@@ -1,15 +1,18 @@
 package com.example.trading.datafetcher.realtime;
 
 import com.example.trading.auth.AuthManager;
+import com.example.trading.kafka.producer.RealtimeClosingPriceProducer;
 import com.example.trading.util.RealTimeDataParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -21,6 +24,9 @@ public class RealtimeClosingPriceDataFetcher {
 
     @Autowired
     RealTimeDataParser realTimeDataParser;
+
+    @Autowired
+    RealtimeClosingPriceProducer realtimeClosingPriceProducer;
 
     private Session session;
     private WebSocketContainer container;
@@ -55,7 +61,11 @@ public class RealtimeClosingPriceDataFetcher {
     @OnMessage
     public void onMessage(String message) {
         System.out.println(message);
-        if(message.charAt(0) == '0') realTimeDataParser.parse(message);
+        if(message.charAt(0) == '0') {
+            List<JSONObject> jsonObjectList = realTimeDataParser.parse(message);
+            for(JSONObject jsonObject : jsonObjectList)
+                realtimeClosingPriceProducer.send(trKey,jsonObject.toString());
+        }
     }
 
     @OnClose
