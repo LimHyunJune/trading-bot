@@ -1,4 +1,4 @@
-package com.example.trading.auth;
+package com.example.trading.manager;
 
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
@@ -20,10 +20,10 @@ import java.util.Map;
 @AllArgsConstructor
 public class AuthManager {
     RestClient restClient;
-
     String appKey;
     String appSecret;
     String approvalKey;
+    String accessToken;
 
     @PostConstruct
     public void init()
@@ -37,7 +37,7 @@ public class AuthManager {
         this.appSecret = appSecret;
     }
 
-    public void getWebSocketConnectionKey()
+    public void setWebSocketConnectionKey()
     {
         JSONObject jo = new JSONObject();
         try{
@@ -51,12 +51,39 @@ public class AuthManager {
 
         try {
             ResponseEntity<Map> response = restClient.post()
-                    .uri("https://openapi.koreainvestment.com:9443//oauth2/Approval")
+                    .uri("https://openapi.koreainvestment.com:9443/oauth2/Approval")
                     .body(jo.toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .toEntity(Map.class);
             this.approvalKey = (String) response.getBody().get("approval_key");
+        }
+        catch (RestClientException e)
+        {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public void setAuthorizationKey()
+    {
+        JSONObject jo = new JSONObject();
+        try{
+            jo.put("grant_type", "client_credentials");
+            jo.put("appkey", appKey);
+            jo.put("appsecret", appSecret);
+        }
+        catch (JSONException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        try {
+            ResponseEntity<Map> response = restClient.post()
+                    .uri("https://openapi.koreainvestment.com:9443/oauth2/tokenP")
+                    .body(jo.toString())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .toEntity(Map.class);
+            this.accessToken = (String) response.getBody().get("access_token");
         }
         catch (RestClientException e)
         {

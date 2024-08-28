@@ -1,4 +1,4 @@
-package com.example.trading.kafka;
+package com.example.trading.manager;
 
 import com.example.trading.kafka.producer.RealtimeClosingPriceProducer;
 import lombok.Data;
