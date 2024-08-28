@@ -1,15 +1,16 @@
 package com.example.trading.datafetcher.realtime;
 
-import com.example.trading.auth.AuthManager;
+import com.example.trading.manager.AuthManager;
 import com.example.trading.kafka.producer.RealtimeClosingPriceProducer;
 import com.example.trading.util.RealTimeDataParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.websocket.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.websocket.*;
+import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +51,16 @@ public class RealtimeClosingPriceDataFetcher {
             e.printStackTrace();
         }
     }
+
+    public void disConnect()
+    {
+        try {
+            this.session.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     @OnOpen
     public void onOpen(Session session) {
