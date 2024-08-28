@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 public class RegisterDTO {
     String appKey;
     String appSecret;
+    String accessToken;
+    String approvalKey;
     String analyticsServer;
 }
