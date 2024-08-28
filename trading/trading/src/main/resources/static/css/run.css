@@ -1,0 +1,44 @@
+.parent {
+  font-family: arial;
+  font-size: 24px;
+  width: 100vw;
+  height: 100vh;
+  /* 설정 */
+  position: relative;
+}
+
+.child {
+  width: 300px;
+  height: 300px;
+  /* 수직 중앙 정렬하기 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner-container {
+  font-family: arial;
+  font-size: 24px;
+  width: 100vw;
+  height: 100vh;
+  /* 설정 */
+  position: relative;
+}
+
+.spinner-child {
+  width: 300px;
+  height: 300px;
+  /* 수직 중앙 정렬하기 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align:center;
+}
+
+.spinner-border
+{
+    width:30%;
+    height:30%;
+}

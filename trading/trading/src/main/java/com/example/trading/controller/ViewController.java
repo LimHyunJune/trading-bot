@@ -13,4 +13,7 @@ public class ViewController {
         return "index";
     }
 
+    @GetMapping("/run")
+    public String run(){return "run";}
+
 }

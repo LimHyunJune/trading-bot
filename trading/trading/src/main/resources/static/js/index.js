@@ -1,14 +1,16 @@
 $( document ).ready(function() {
-    $('#loading').hide();
 });
 
 function signIn()
 {
 	$('#validAppKey').hide();
 	$('#validAppSecret').hide();
+	$('#validAnalyticsServer').hide();
 
 	var appKey = $('#appKey').val();
 	var appSecret = $('#appSecret').val();
+	var approvalKey = $('#approvalKey').val();
+	var accessToken = $('#accessToken').val();
 	var analyticsServer = $('#analyticsServer').val();
 
 
@@ -27,12 +29,15 @@ function signIn()
     if(analyticsServer == "")
     {
         $('#validAnalyticsServer').show();
+        return;
     }
 
 
 	var data ={
 			appKey : appKey,
 			appSecret : appSecret,
+			approvalKey : approvalKey,
+			accessToken : accessToken,
 			analyticsServer : analyticsServer
 	};
 
@@ -47,23 +52,7 @@ function signIn()
 	    },
     	success: function(response) {
             alert("success");
-            $('#register').hide();
-            $('#loading').show();
-//            $.ajax({
-//                    url: 'election',
-//                    type: 'GET',
-//                    contentType: 'application/json',
-//            	    xhrFields: {
-//            	        withCredentials: true
-//            	    },
-//                	success: function(response) {
-//                        alert("success");
-//                        getView("stock_election");
-//                    },
-//                    failure: function( response ) {
-//                 	   alert('fail');
-//                    }
-//            	});
+            getView('run');
         },
         failure: function( response ) {
      	   alert('fail');
