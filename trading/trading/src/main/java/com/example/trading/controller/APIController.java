@@ -10,10 +10,7 @@ import com.example.trading.model.Selling;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -48,7 +45,7 @@ public class APIController {
         else
             authManager.setAccessToken(registerDTO.getAccessToken());
 
-         kafkaManager.init(registerDTO.getAnalyticsServer());
+        //kafkaManager.init(registerDTO.getAnalyticsServer());
     }
 
     /*
@@ -63,13 +60,10 @@ public class APIController {
     }
 
     @GetMapping("/buy")
-    public void buy()
+    public void buy(@RequestParam("stock") String stock)
     {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        buying.start(stock);
+        buying.complete();
     }
 
     @GetMapping("/sell")
