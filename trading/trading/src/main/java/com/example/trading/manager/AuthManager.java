@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,8 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthManager {
+    Logger logger = LoggerFactory.getLogger(AuthManager.class);
+
     RestClient restClient;
     String appKey;
     String appSecret;
@@ -57,6 +61,7 @@ public class AuthManager {
                     .retrieve()
                     .toEntity(Map.class);
             this.approvalKey = (String) response.getBody().get("approval_key");
+            logger.info("approvalKey : " + approvalKey);
         }
         catch (RestClientException e)
         {
@@ -84,6 +89,8 @@ public class AuthManager {
                     .retrieve()
                     .toEntity(Map.class);
             this.accessToken = (String) response.getBody().get("access_token");
+            logger.info("accessToken : " + accessToken);
+
         }
         catch (RestClientException e)
         {
